@@ -16,6 +16,9 @@ public class UserOrdersActivity extends AppCompatActivity {
     public void onAccountActivity (View view){
         startActivity(new Intent(this, UserProfileActivity.class));
     }
+    public void onScanner(View view){
+        startActivity(new Intent(this, ScannerActivity.class));
+    }
 
     @Override
     public void onBackPressed() {}
