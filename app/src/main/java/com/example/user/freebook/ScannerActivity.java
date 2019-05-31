@@ -2,6 +2,7 @@ package com.example.user.freebook;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Vibrator;
 import android.support.annotation.NonNull;
@@ -23,10 +24,11 @@ import java.io.IOException;
 public class ScannerActivity extends AppCompatActivity {
 
     SurfaceView cameraPreview;
-    TextView txtResult;
     BarcodeDetector barcodeDetector;
     CameraSource cameraSource;
     final int RequestCameraPermissionID = 1001;
+
+    public static final String ENCODED_DATA="encoded_data";
 
 
     @Override
@@ -53,8 +55,7 @@ public class ScannerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scanner);
 
-        cameraPreview = (SurfaceView) findViewById(R.id.cameraPreview);
-        txtResult = (TextView) findViewById(R.id.txtResult);
+        cameraPreview = findViewById(R.id.cameraPreview);
 
         barcodeDetector = new BarcodeDetector.Builder(this)
                 .setBarcodeFormats(Barcode.QR_CODE)
@@ -103,15 +104,13 @@ public class ScannerActivity extends AppCompatActivity {
                 final SparseArray<Barcode> qrcodes = detections.getDetectedItems();
                 if(qrcodes.size() != 0)
                 {
-                    txtResult.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            //Create vibrate
-                            Vibrator vibrator = (Vibrator)getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
-                            vibrator.vibrate(1000);
-                            txtResult.setText(qrcodes.valueAt(0).displayValue);
-                        }
-                    });
+                    String result = qrcodes.valueAt(0).displayValue;
+                    Intent intent = new Intent(getApplicationContext(), BookReceiverActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtra(ENCODED_DATA, result);
+                    startActivity(intent);
+                    finish();
+
                 }
             }
         });

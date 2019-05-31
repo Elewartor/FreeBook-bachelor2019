@@ -22,6 +22,9 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
 
     private final String REGISTRATION_URL="http://188.230.98.137/registration.php";
     private final String LOGIN_URL="http://188.230.98.137/login.php";
+    private final String GET_USER_ORDERS_URL="http://188.230.98.137/get_orders_data.php";
+    private final String GET_BOOK_BY_QR_DATA_URL="http://188.230.98.137/get_book_by_qr.php";
+    private final String CREATE_ORDER_URL="http://188.230.98.137/create_order.php";
 
     public BackgroundTask(Context context){
         this.context = context;
@@ -110,6 +113,127 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+
+        //User orders task
+        if(method.equals("get_user_orders")){
+            String studentEmail = params[1];
+
+            try {
+                URL url = new URL(GET_USER_ORDERS_URL);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String data = URLEncoder.encode("student_email","UTF-8") +  "=" + URLEncoder.encode(studentEmail,"UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+                String response = "";
+                String line = "";
+                while ((line = bufferedReader.readLine())!=null){
+                    response+=line;
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+
+                return response;
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        //Get book info by QR data
+        if(method.equals("get_book_by_qr_data")){
+            String book_id = params[1];
+
+            try {
+                URL url = new URL(GET_BOOK_BY_QR_DATA_URL);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String data = URLEncoder.encode("id","UTF-8") +  "=" + URLEncoder.encode(book_id,"UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+                String response = "";
+                String line = "";
+                while ((line = bufferedReader.readLine())!=null){
+                    response+=line;
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+
+                return response;
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        //Create order task
+        if(method.equals("create_order")){
+            String user_email = params[1];
+            String book_id = params[2];
+
+            try {
+                URL url = new URL(CREATE_ORDER_URL);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String data =
+                        URLEncoder.encode("bookId","UTF-8") +  "=" + URLEncoder.encode(book_id,"UTF-8")+"&"+
+                        URLEncoder.encode("userEmail","UTF-8") +  "=" + URLEncoder.encode(user_email,"UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+                String response = "";
+                String line = "";
+                while ((line = bufferedReader.readLine())!=null){
+                    response+=line;
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return response;
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         }
 
         return null;
