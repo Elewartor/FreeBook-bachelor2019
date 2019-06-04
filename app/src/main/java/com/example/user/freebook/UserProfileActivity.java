@@ -5,7 +5,13 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.user.freebook.Connections.BackgroundTask;
+import com.squareup.picasso.Picasso;
+
+import java.util.concurrent.ExecutionException;
 
 public class UserProfileActivity extends AppCompatActivity {
 
@@ -14,6 +20,7 @@ public class UserProfileActivity extends AppCompatActivity {
     private TextView tvUserName;
     private TextView tvUserSurname;
     private TextView tvUserGroup;
+    private ImageView ivUserQRCode;
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -28,6 +35,7 @@ public class UserProfileActivity extends AppCompatActivity {
         tvUserName = findViewById(R.id.tv_user_name);
         tvUserSurname = findViewById(R.id.tv_user_surname);
         tvUserGroup = findViewById(R.id.tv_user_group);
+        ivUserQRCode = findViewById(R.id.iv_user_qrcode);
 
         sharedPreferences = getSharedPreferences(LoginActivity.USER_DATA, MODE_PRIVATE);
 
@@ -37,6 +45,17 @@ public class UserProfileActivity extends AppCompatActivity {
         tvUserSurname.setText(sharedPreferences.getString(LoginActivity.USER_SURNAME,""));
         tvUserGroup.setText(sharedPreferences.getString(LoginActivity.USER_GROUP,""));
 
+        String method = "get_user_QRCode";
+        String email = sharedPreferences.getString(LoginActivity.USER_EMAIL,null);
+        if(email != null) {
+            try {
+                Picasso.get().load(new BackgroundTask(this).execute(method, email).get()).into(ivUserQRCode);
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void onLogout(View view){

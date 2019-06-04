@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.user.freebook.Connections.BackgroundTask;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

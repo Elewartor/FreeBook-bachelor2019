@@ -1,12 +1,14 @@
 package com.example.user.freebook;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.TextView;
+
+import com.example.user.freebook.Adapters.OrdersDataAdapter;
+import com.example.user.freebook.Connections.BackgroundTask;
+import com.example.user.freebook.Objects.OrderDataObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -108,6 +110,9 @@ public class UserOrdersActivity extends AppCompatActivity {
     }
     public void onScanner(View view){
         startActivity(new Intent(this, ScannerActivity.class));
+    }
+    public void onLibraryActivity(View view){
+        startActivity(new Intent(getApplicationContext(), LibraryActivity.class));
     }
     @Override
     public void onBackPressed() {}

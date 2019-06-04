@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.user.freebook.Connections.BackgroundTask;
+
 import java.util.concurrent.ExecutionException;
 
 public class RegisterActivity extends AppCompatActivity {

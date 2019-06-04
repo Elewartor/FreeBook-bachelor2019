@@ -1,4 +1,4 @@
-package com.example.user.freebook;
+package com.example.user.freebook.Adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -7,6 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import com.example.user.freebook.Objects.OrderDataObject;
+import com.example.user.freebook.R;
 
 import java.util.ArrayList;
 
