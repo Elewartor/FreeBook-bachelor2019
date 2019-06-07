@@ -1,7 +1,10 @@
 package com.example.user.freebook;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ListView;
 
 import com.example.user.freebook.Adapters.LibraryDataAdapter;
@@ -57,6 +60,7 @@ public class LibraryActivity extends AppCompatActivity {
         String library_book_gamout;
         String library_book_left;
         String author_name;
+        String image_way;
 
         int counter=0;
         while (counter<jsonArray.length()){
@@ -73,6 +77,7 @@ public class LibraryActivity extends AppCompatActivity {
             library_book_gamout = jo.getString("library_book_gamout");
             library_book_left = jo.getString("library_book_left");
             author_name = getBookAuthors(book_id);
+            image_way = jo.getString("gallery_server_way");
 
             LibraryObject libraryObject = new LibraryObject(
                     book_id,
@@ -85,8 +90,8 @@ public class LibraryActivity extends AppCompatActivity {
                     book_page_amount,
                     library_book_gamout,
                     library_book_left,
-                    author_name
-            );
+                    author_name,
+                    image_way);
 
             libraryObjects.add(libraryObject);
             if(libraryObjects.size() != 0){
@@ -128,4 +133,31 @@ public class LibraryActivity extends AppCompatActivity {
 
         return authors;
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.library_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.on_account :
+                startActivity(new Intent(this, UserProfileActivity.class));
+                return true;
+            case R.id.on_scanner:
+                startActivity(new Intent(this, ScannerActivity.class));
+                return true;
+            case R.id.on_orders:
+                startActivity(new Intent(this, UserOrdersActivity.class));
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {}
 }

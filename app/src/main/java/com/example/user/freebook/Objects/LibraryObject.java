@@ -13,8 +13,9 @@ public class LibraryObject {
     private String library_book_gamout;
     private String library_book_left;
     private String author_name;
+    private String image_way;
 
-    public LibraryObject(String book_id, String book_name, String book_type, String book_source, String book_publish_place, String book_publisher, String book_year, String book_page_amount, String library_book_gamout, String library_book_left, String author_name) {
+    public LibraryObject(String book_id, String book_name, String book_type, String book_source, String book_publish_place, String book_publisher, String book_year, String book_page_amount, String library_book_gamout, String library_book_left, String author_name, String image_way) {
         this.book_id = book_id;
         this.book_name = book_name;
         this.book_type = book_type;
@@ -26,6 +27,7 @@ public class LibraryObject {
         this.library_book_gamout = library_book_gamout;
         this.library_book_left = library_book_left;
         this.author_name = author_name;
+        this.image_way = image_way;
     }
 
     public String getBook_id() {
@@ -70,5 +72,9 @@ public class LibraryObject {
 
     public String getAuthor_name() {
         return author_name;
+    }
+
+    public String getImage_way() {
+        return image_way;
     }
 }

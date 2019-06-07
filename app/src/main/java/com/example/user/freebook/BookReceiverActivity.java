@@ -1,13 +1,17 @@
 package com.example.user.freebook;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.user.freebook.Connections.BackgroundTask;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -72,7 +76,7 @@ public class BookReceiverActivity extends AppCompatActivity {
 
         String authors = "";
         int counter = 0;
-        while (counter<jsonArray.length()){
+        while (counter < jsonArray.length()) {
             JSONObject jo = jsonArray.getJSONObject(counter);
 
             String author = jo.getString("author.author_name");
@@ -93,10 +97,23 @@ public class BookReceiverActivity extends AppCompatActivity {
         String library_book_gamout = jo.getString("library.library_book_gamout");
         String library_book_left = jo.getString("library.library_book_left");
         String author_name = authors;
+        String image_way = jo.getString("gallery_server_way");
+
+        if (!library_book_left.equals("0")) {
+            tv_library_book_left.setTextColor(Color.GREEN);
+        } else {
+            tv_library_book_left.setTextColor(Color.RED);
+            Button bt_submit = findViewById(R.id.bt_submit_order);
+            bt_submit.setActivated(false);
+        }
 
         tv_book_name.setText(book_name);
         tv_book_type.setText(book_type);
-        tv_book_source.setText(book_source);
+        if (book_source.equals("null")) {
+            tv_book_source.setVisibility(View.INVISIBLE);
+        } else {
+            tv_book_source.setText(book_source);
+        }
         tv_book_publish_place.setText(book_publish_place);
         tv_book_publisher.setText(book_publisher);
         tv_book_year.setText(book_year);
@@ -104,6 +121,9 @@ public class BookReceiverActivity extends AppCompatActivity {
         tv_library_book_gamout.setText(library_book_gamout);
         tv_library_book_left.setText(library_book_left);
         tv_author_name.setText(author_name);
+
+        ImageView iv_book_image = findViewById(R.id.iv_book_image);
+        Picasso.get().load(image_way).into(iv_book_image);
 
     }
 
@@ -113,10 +133,8 @@ public class BookReceiverActivity extends AppCompatActivity {
         if(user_email != null){
             try {
                 String result = new BackgroundTask(this).execute(method, user_email, book_id).get();
-                if(result.equals("Order was created successfully.")){
-                    Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(getApplicationContext(), UserOrdersActivity.class));
-                }
+                Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(), UserOrdersActivity.class));
             } catch (ExecutionException e) {
                 e.printStackTrace();
             } catch (InterruptedException e) {

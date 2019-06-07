@@ -1,5 +1,6 @@
 package com.example.user.freebook;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -52,6 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, LoginActivity.class));
         }else{
             Toast.makeText(this, "Passwords do no match", Toast.LENGTH_SHORT).show();
         }

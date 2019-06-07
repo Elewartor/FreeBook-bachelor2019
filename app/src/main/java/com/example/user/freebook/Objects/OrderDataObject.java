@@ -2,6 +2,7 @@ package com.example.user.freebook.Objects;
 
 public class OrderDataObject {
 
+    private String book_id;
     private String book_name;
     private String book_type;
     private String book_source;
@@ -13,9 +14,11 @@ public class OrderDataObject {
     private String order_deadline_date;
     private String order_days_left;
     private String order_status;
+    private String book_authors;
+    private String image_way;
 
     public OrderDataObject(
-            String book_name,
+            String book_id, String book_name,
             String book_type,
             String book_source,
             String book_publish_place,
@@ -25,7 +28,8 @@ public class OrderDataObject {
             String order_order_date,
             String order_deadline_date,
             String order_days_left,
-            String order_status) {
+            String order_status, String book_authors, String image_way) {
+        this.book_id = book_id;
 
         this.book_name = book_name;
         this.book_type = book_type;
@@ -38,7 +42,9 @@ public class OrderDataObject {
         this.order_deadline_date = order_deadline_date;
         this.order_days_left = order_days_left;
         this.order_status = order_status;
+        this.book_authors = book_authors;
 
+        this.image_way = image_way;
     }
 
     public String getBook_name() {
@@ -83,5 +89,17 @@ public class OrderDataObject {
 
     public String getOrder_status() {
         return order_status;
+    }
+
+    public String getImage_way() {
+        return image_way;
+    }
+
+    public String getBook_authors() {
+        return book_authors;
+    }
+
+    public String getBook_id() {
+        return book_id;
     }
 }

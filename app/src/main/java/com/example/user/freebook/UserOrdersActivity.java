@@ -3,8 +3,11 @@ package com.example.user.freebook;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Switch;
 
 import com.example.user.freebook.Adapters.OrdersDataAdapter;
 import com.example.user.freebook.Connections.BackgroundTask;
@@ -52,6 +55,7 @@ public class UserOrdersActivity extends AppCompatActivity {
         JSONObject jsonObject = new JSONObject(userOrders);
         JSONArray jsonArray = jsonObject.getJSONArray("server_response");
 
+        String book_id;
         String book_name;
         String book_type;
         String book_source;
@@ -63,11 +67,14 @@ public class UserOrdersActivity extends AppCompatActivity {
         String order_deadline_date;
         String order_days_left;
         String order_status;
+        String book_authors;
+        String image_way;
 
         int counter=0;
         while(counter<jsonArray.length()){
             JSONObject jo = jsonArray.getJSONObject(counter);
 
+            book_id = jo.getString("book_id");
             book_name = jo.getString("book_name");
             book_type = jo.getString("book_type");
             book_source = jo.getString("book_source");
@@ -79,8 +86,11 @@ public class UserOrdersActivity extends AppCompatActivity {
             order_deadline_date = jo.getString("order_deadline_date");
             order_days_left = jo.getString("order_days_left");
             order_status = jo.getString("order_status");
+            book_authors = getBookAuthors(book_id);
+            image_way = jo.getString("gallery_server_way");
 
             OrderDataObject orderDataObject = new OrderDataObject(
+                    book_id,
                     book_name,
                     book_type,
                     book_source,
@@ -91,7 +101,9 @@ public class UserOrdersActivity extends AppCompatActivity {
                     order_order_date,
                     order_deadline_date,
                     order_days_left,
-                    order_status);
+                    order_status,
+                    book_authors,
+                    image_way);
 
             orderDataObjects.add(orderDataObject);
 
@@ -105,14 +117,55 @@ public class UserOrdersActivity extends AppCompatActivity {
         }
 
     }
-    public void onAccountActivity (View view){
-        startActivity(new Intent(this, UserProfileActivity.class));
+    private String getBookAuthors(String bookId){
+        String authors = "";
+        String method = "get_book_authors";
+        try {
+            String authorsResponse = new BackgroundTask(this).execute(method, bookId).get();
+            JSONObject jsonObject = new JSONObject(authorsResponse);
+            JSONArray jsonArray = jsonObject.getJSONArray("server_response");
+
+            int counter = 0;
+            while (counter<jsonArray.length()){
+                JSONObject jo = jsonArray.getJSONObject(counter);
+                authors += jo.getString("author_name");
+
+                counter++;
+            }
+
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return authors;
     }
-    public void onScanner(View view){
-        startActivity(new Intent(this, ScannerActivity.class));
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.orders_menu, menu);
+        return true;
     }
-    public void onLibraryActivity(View view){
-        startActivity(new Intent(getApplicationContext(), LibraryActivity.class));
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.on_account :
+                startActivity(new Intent(this, UserProfileActivity.class));
+                return true;
+            case R.id.on_scanner:
+                startActivity(new Intent(this, ScannerActivity.class));
+                return true;
+            case R.id.on_library:
+                startActivity(new Intent(getApplicationContext(), LibraryActivity.class));
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
     @Override
     public void onBackPressed() {}

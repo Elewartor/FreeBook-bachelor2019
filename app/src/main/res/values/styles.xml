@@ -3,9 +3,37 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/colorSecondary</item>
+        <item name="colorPrimaryDark">@color/colorSecondaryDark</item>
+        <item name="colorAccent">@color/colorSecondary</item>
+    </style>
+
+    <style name="MyTextStyle">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/colorTextOnPrimary</item>
+        <item name="android:typeface">normal</item>
+    </style>
+    <style name="LittleTextStyle">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/colorTextOnPrimary</item>
+        <item name="android:typeface">normal</item>
+    </style>
+    <style name="SecondaryTextStyle">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:typeface">normal</item>
+    </style>
+    <style name="ButtonStyle">
+        <item name="android:background">@color/colorSecondary</item>
+        <item name="android:textColor">@color/colorTextOnSecondary</item>
+        <item name="android:layout_marginBottom">0dp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:typeface">monospace</item>
+    </style>
+    <style name="UserMsgStyle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorTextOnPrimary</item>
+        <item name="android:typeface">monospace</item>
     </style>
 
 </resources>

@@ -253,7 +253,7 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
 
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
                 String data =
-                        URLEncoder.encode("bookId","UTF-8") +  "=" + URLEncoder.encode(book_id,"UTF-8")+"&"+
+                        URLEncoder.encode("bookQR","UTF-8") +  "=" + URLEncoder.encode(book_id,"UTF-8")+"&"+
                         URLEncoder.encode("userEmail","UTF-8") +  "=" + URLEncoder.encode(user_email,"UTF-8");
                 bufferedWriter.write(data);
                 bufferedWriter.flush();

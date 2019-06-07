@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:background="@drawable/shadow">
 
 
     <TextView
         android:id="@+id/tv_book_name"
+        style="@style/MyTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,91 +22,179 @@
 
     <TextView
         android:id="@+id/tv_book_type"
+        style="@style/LittleTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_book_image"
         app:layout_constraintTop_toBottomOf="@+id/tv_book_name" />
 
     <TextView
         android:id="@+id/tv_book_source"
+        style="@style/LittleTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_book_type" />
+        app:layout_constraintStart_toEndOf="@+id/tv_book_type"
+        app:layout_constraintTop_toBottomOf="@+id/tv_book_name" />
 
     <TextView
         android:id="@+id/tv_book_publish_place"
+        style="@style/LittleTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_book_source" />
+        app:layout_constraintStart_toEndOf="@+id/iv_book_image"
+        app:layout_constraintTop_toBottomOf="@+id/tv_authors" />
 
     <TextView
         android:id="@+id/tv_book_publisher"
+        style="@style/LittleTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_book_publish_place" />
+        app:layout_constraintStart_toEndOf="@+id/tv_book_publish_place"
+        app:layout_constraintTop_toBottomOf="@+id/tv_authors" />
 
     <TextView
         android:id="@+id/tv_book_year"
+        style="@style/LittleTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_book_publisher" />
+        app:layout_constraintStart_toEndOf="@+id/tv_book_publisher"
+        app:layout_constraintTop_toBottomOf="@+id/tv_authors" />
 
     <TextView
         android:id="@+id/tv_book_page_amount"
+        style="@style/LittleTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_book_year" />
+        android:layout_marginEnd="8dp"
+        android:text="0000"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayout" />
 
     <TextView
         android:id="@+id/tv_order_order_date"
+        style="@style/LittleTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_book_page_amount" />
+        app:layout_constraintStart_toEndOf="@+id/textView7"
+        app:layout_constraintTop_toBottomOf="@+id/tv_book_publish_place" />
 
     <TextView
         android:id="@+id/tv_order_deadline_date"
+        style="@style/LittleTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView8"
         app:layout_constraintTop_toBottomOf="@+id/tv_order_order_date" />
 
     <TextView
-        android:id="@+id/tv_order_days_left"
+        android:id="@+id/tv_order_status"
+        style="@style/LittleTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="8dp"
+        android:text="0000"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+        app:layout_constraintTop_toTopOf="@+id/guideline" />
+
+    <ImageView
+        android:id="@+id/iv_book_image"
+        android:layout_width="120dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_order_deadline_date" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_book_name"
+        app:srcCompat="@android:drawable/ic_delete" />
 
     <TextView
-        android:id="@+id/tv_order_status"
+        android:id="@+id/tv_authors"
+        style="@style/LittleTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/iv_book_image"
+        app:layout_constraintTop_toBottomOf="@+id/tv_book_type" />
+
+    <TextView
+        android:id="@+id/textView2"
+        style="@style/LittleTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pages: "
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintEnd_toStartOf="@+id/tv_book_page_amount" />
+
+    <TextView
+        android:id="@+id/textView5"
+        style="@style/LittleTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Status: "
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tv_order_status"
+        app:layout_constraintTop_toTopOf="@+id/guideline"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView7"
+        style="@style/LittleTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Rent date: "
+        app:layout_constraintStart_toEndOf="@+id/iv_book_image"
+        app:layout_constraintTop_toBottomOf="@+id/tv_book_publish_place" />
+
+    <TextView
+        android:id="@+id/textView8"
+        style="@style/LittleTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Deadline: "
+        app:layout_constraintStart_toEndOf="@+id/iv_book_image"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="190dp" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="16dp"
+        android:layout_height="0dp"
+        android:background="@color/colorSecondary"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_order_days_left" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"></LinearLayout>
+
 </android.support.constraint.ConstraintLayout>

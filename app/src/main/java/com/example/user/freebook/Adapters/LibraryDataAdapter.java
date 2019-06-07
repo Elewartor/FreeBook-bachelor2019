@@ -6,10 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.user.freebook.Objects.LibraryObject;
 import com.example.user.freebook.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -40,6 +42,7 @@ public class LibraryDataAdapter extends ArrayAdapter<LibraryObject> {
         String library_book_gamout = getItem(position).getLibrary_book_gamout();
         String library_book_left = getItem(position).getLibrary_book_left();
         String author_name = getItem(position).getAuthor_name();
+        String image_way = getItem(position).getImage_way();
 
         LibraryObject libraryObject = new LibraryObject(
                 book_id,
@@ -52,8 +55,8 @@ public class LibraryDataAdapter extends ArrayAdapter<LibraryObject> {
                 book_page_amount,
                 library_book_gamout,
                 library_book_left,
-                author_name
-        );
+                author_name,
+                image_way);
 
         LayoutInflater inflater = LayoutInflater.from(context);
         convertView = inflater.inflate(resource, parent, false);
@@ -71,7 +74,11 @@ public class LibraryDataAdapter extends ArrayAdapter<LibraryObject> {
 
         tv_library_book_name.setText(book_name);
         tv_library_book_type.setText(book_type);
-        tv_library_book_source.setText(book_source);
+        if(book_source == "null"){
+            tv_library_book_source.setVisibility(View.INVISIBLE);
+        }else {
+            tv_library_book_source.setText(book_source);
+        }
         tv_library_book_publish_place.setText(book_publish_place);
         tv_library_book_publisher.setText(book_publisher);
         tv_library_book_year.setText(book_year);
@@ -79,6 +86,9 @@ public class LibraryDataAdapter extends ArrayAdapter<LibraryObject> {
         tv_library_library_book_gamout.setText(library_book_gamout);
         tv_library_library_book_left.setText(library_book_left);
         tv_library_author_name.setText(author_name);
+
+        ImageView iv_book_image = convertView.findViewById(R.id.iv_book_image);
+        Picasso.get().load(image_way).into(iv_book_image);
 
         return convertView;
     }
